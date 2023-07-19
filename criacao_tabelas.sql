@@ -1,7 +1,7 @@
 CREATE TABLE
     Regiao (
         cep VARCHAR2(50),
-        estado VARCHAR2(2),
+        estado VARCHAR2(20),
         cidade VARCHAR2(50),
         bairro VARCHAR2(50),
         rua VARCHAR2(50),
@@ -92,7 +92,7 @@ CREATE TABLE
         email_vendedor_anuncio VARCHAR2(50),
         tipo_de_produto VARCHAR2(50),
         nome_do_produto VARCHAR2(50),
-        descricao VARCHAR2(50),
+        descricao VARCHAR2(100),
         preco NUMBER,
         CONSTRAINT item_pk PRIMARY KEY (cod_anuncio, email_vendedor_anuncio),
         CONSTRAINT item_anuncio_fk FOREIGN KEY (cod_anuncio, email_vendedor_anuncio) REFERENCES Anuncio (cod, email_vendedor)
