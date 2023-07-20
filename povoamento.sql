@@ -378,40 +378,43 @@ VALUES
 
 -- Fim Motoboy
 -- Inicio Anuncio
-INSERT INTO
-    Anuncio (email_vendedor, cod)
-VALUES
-    ('caiopossidio@gmail.com', 1);
+CREATE SEQUENCE cod_anuncio
+INCREMENT BY 1 START WITH 1;
 
 INSERT INTO
     Anuncio (email_vendedor, cod)
 VALUES
-    ('caiopossidio@gmail.com', 2);
+    ('caiopossidio@gmail.com', cod_anuncio.NEXTVAL);
 
 INSERT INTO
     Anuncio (email_vendedor, cod)
 VALUES
-    ('asp@gmail.com', 3);
+    ('caiopossidio@gmail.com', cod_anuncio.NEXTVAL);
 
 INSERT INTO
     Anuncio (email_vendedor, cod)
 VALUES
-    ('namoradadefred@gmail.com', 4);
+    ('asp@gmail.com', cod_anuncio.NEXTVAL);
 
 INSERT INTO
     Anuncio (email_vendedor, cod)
 VALUES
-    ('precisodecomida@gmail.com', 5);
+    ('namoradadefred@gmail.com', cod_anuncio.NEXTVAL);
 
 INSERT INTO
     Anuncio (email_vendedor, cod)
 VALUES
-    ('precisodecomida@gmail.com', 6);
+    ('precisodecomida@gmail.com', cod_anuncio.NEXTVAL);
 
 INSERT INTO
     Anuncio (email_vendedor, cod)
 VALUES
-    ('robertmiller@gmail.com', 7);
+    ('precisodecomida@gmail.com', cod_anuncio.NEXTVAL);
+
+INSERT INTO
+    Anuncio (email_vendedor, cod)
+VALUES
+    ('robertmiller@gmail.com', cod_anuncio.NEXTVAL);
 
 -- Fim Anuncio
 -- Inicio Item

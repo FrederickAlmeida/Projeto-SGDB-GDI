@@ -1,6 +1,6 @@
 CREATE TABLE
     Regiao (
-        cep VARCHAR2(50),
+        cep VARCHAR2(9),
         estado VARCHAR2(20),
         cidade VARCHAR2(50),
         bairro VARCHAR2(50),
@@ -25,7 +25,7 @@ CREATE TABLE
     Telefone (
         email VARCHAR2(50),
         numero VARCHAR2(14),
-        CONSTRAINT telefone_pk PRIMARY KEY (numero),
+        CONSTRAINT telefone_pk PRIMARY KEY (email, numero),
         CONSTRAINT telefone_usuario_fk FOREIGN KEY (email) REFERENCES Usuario (email)
     );
 
