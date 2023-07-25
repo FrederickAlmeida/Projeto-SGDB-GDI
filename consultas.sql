@@ -98,3 +98,16 @@ WHERE descricao IS NOT NULL
 SELECT U.nome, C.num_cartao
 FROM Usuario U LEFT OUTER JOIN Comprador C
 ON U.email = C.email
+
+-- Cria index no preço do item
+/
+CREATE INDEX idx_item_preco ON 
+    Item(preco);
+
+/
+
+-- Cria index no código do cupom de uma compra
+CREATE INDEX idx_compra_cupom ON 
+    Compra(cod_cupom);
+
+/

@@ -105,10 +105,6 @@ CREATE TABLE
 /
 
 /
-CREATE INDEX idx_item_preco ON 
-    Item(preco);
-
-/
 
 CREATE TABLE
     Favorita (
@@ -135,10 +131,6 @@ CREATE TABLE
         CONSTRAINT compra_cupom_fk FOREIGN KEY (cod_cupom) REFERENCES Cupom (cod)
     );
     
-/
-CREATE INDEX idx_compra_cupom ON 
-    Compra(cod_cupom);
-
 /
 
 /
