@@ -28,6 +28,8 @@ INSERT INTO
 VALUES
     ('paguso_da_maldade@terra.br', '81949929989');
 
+
+
 -- mostrar o item mais caro e o mais barato comprados pelo "Gabriel"
 SELECT i.nome_do_produto, i.preco FROM item i
 INNER JOIN compra c ON c.cod_anuncio = i.cod_anuncio
@@ -53,3 +55,59 @@ WHERE i.preco < ALL(SELECT i.preco FROM item i
                     INNER JOIN compra c ON c.cod_anuncio = i.cod_anuncio
                     INNER JOIN usuario u ON u.email = c.email_vendedor
                     WHERE u.nome = 'Caio Possídio');
+
+
+
+-- lista se o cupom vale ou não a pena ser utilizado baseado no desconto
+
+/* CREATE FUNCTION desconto (codigo_cupom IN cupom.codigo%type) RETURN VARCHAR2 IS
+    desconto_cupom cupom.desconto%type;
+BEGIN
+    SELECT i. into conc FROM cupom X WHERE c */
+
+-- adicionar o atributo nome na tabela cupom
+
+/
+ALTER TABLE Cupom
+ADD nome VARCHAR2(20);
+    
+/
+
+
+-- Atualiza o cupom "123456"
+
+UPDATE Cupom
+SET desconto = 90
+WHERE cod = 123456;
+/
+
+-- Deleta o cupom "666666" 
+
+DELETE FROM Cupom
+WHERE cod = 666666;
+/
+
+-- lista todos os itens que não tem descrição (descrição nula)
+
+SELECT *
+FROM Item
+WHERE descricao IS NOT NULL
+
+-- lista todos os usuários que também são compradores e seus números de cartões de crédito
+
+SELECT U.nome, C.num_cartao
+FROM Usuario U LEFT OUTER JOIN Comprador C
+ON U.email = C.email
+
+-- Cria index no preço do item
+/
+CREATE INDEX idx_item_preco ON 
+    Item(preco);
+
+/
+
+-- Cria index no código do cupom de uma compra
+CREATE INDEX idx_compra_cupom ON 
+    Compra(cod_cupom);
+
+/
