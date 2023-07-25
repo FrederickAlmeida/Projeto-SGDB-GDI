@@ -26,7 +26,7 @@
 | &check; |              GROUP BY               |
 | &check; |               HAVING                |
 | &check; |     UNION ou INTERSECT ou MINUS     |
-| &cross; |             CREATE VIEW             |
+| &check; |             CREATE VIEW             |
 | &check; |           GRANT / REVOKE            |
 
 
