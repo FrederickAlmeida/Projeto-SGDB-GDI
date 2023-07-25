@@ -111,3 +111,16 @@ CREATE INDEX idx_compra_cupom ON
     Compra(cod_cupom);
 
 /
+-- tabela virtual que mostra apenas o email e o nome do usuario
+CREATE VIEW identificacao AS
+SELECT email, nome FROM usuario;
+/
+
+-- tabela virtual para mostrar de forma simplificada os itens vendidos por Caio Possidio
+CREATE VIEW catalogo_simplified AS
+SELECT tipo_de_produto, nome_do_produto, preco FROM item
+WHERE email_vendedor_anuncio = 'caiopossidio@gmail.com';
+/
+select * from identificacao;
+/
+select * from catalogo_simplified;
