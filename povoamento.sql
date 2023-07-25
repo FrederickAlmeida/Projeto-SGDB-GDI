@@ -16,12 +16,33 @@ VALUES
 INSERT INTO
     Cupom (cod, desconto)
 VALUES
-    (696867, 23);
+    (696867, 45);
 
 INSERT INTO
     Cupom (cod, desconto)
 VALUES
-    (204060, 15);
+    (666666, 1);
+
+
+INSERT INTO
+    Cupom (cod, desconto)
+VALUES
+    (204060, 55);
+    
+INSERT INTO
+    Cupom (cod, desconto)
+VALUES
+    (319432, 20);
+
+INSERT INTO
+    Cupom (cod, desconto)
+VALUES
+    (812372, 10);
+
+INSERT INTO
+    Cupom (cod, desconto)
+VALUES
+    (543242, 13);
 
 -- Fim Cupom
 -- Inicio cartao de credito
@@ -452,7 +473,7 @@ VALUES
         'caiopossidio@gmail.com',
         'Comida',
         'Pizza de frango',
-        'Pizza de frango com gostosura mediana',
+        NULL,
         15.00
     );
 
@@ -547,7 +568,7 @@ VALUES
         'robertmiller@gmail.com',
         'Móveis e decoração',
         'Mesa de escritório',
-        'Mesa de escritório novinha em folha',
+        NULL,
         300.00
     );
 

@@ -1,10 +1,10 @@
 CREATE TABLE
     Regiao (
         cep VARCHAR2(9),
-        estado VARCHAR2(20),
-        cidade VARCHAR2(50),
-        bairro VARCHAR2(50),
-        rua VARCHAR2(50),
+        estado VARCHAR2(20) NOT NULL,
+        cidade VARCHAR2(50) NOT NULL,
+        bairro VARCHAR2(50) NOT NULL,
+        rua VARCHAR2(50) NOT NULL,
         CONSTRAINT reigao_pk PRIMARY KEY (cep)
     );
 
@@ -12,7 +12,7 @@ CREATE TABLE
 CREATE TABLE
     Usuario (
         email VARCHAR2(50),
-        nome VARCHAR2(30),
+        nome VARCHAR2(30) NOT NULL,
         cep VARCHAR2(9),
         numero VARCHAR2(50),
         complemento VARCHAR2(50),
@@ -33,16 +33,19 @@ CREATE TABLE
 CREATE TABLE
     Cupom (
         cod NUMBER,
-        desconto NUMBER,
+        desconto NUMBER NOT NULL,
         CONSTRAINT cupom_pk PRIMARY KEY (cod)
     );
 
 /
+
+
+/
 CREATE TABLE
     Cartao_de_credito (
-        cvv VARCHAR2(3),
+        cvv VARCHAR2(3) NOT NULL,
         numero VARCHAR2(20),
-        validade VARCHAR2(5),
+        validade VARCHAR2(5) NOT NULL,
         CONSTRAINT cartao_de_credito_pk PRIMARY KEY (numero),
         CONSTRAINT cartao_de_credito_validade_ck CHECK (validade LIKE '__/__')
     );
@@ -61,7 +64,7 @@ CREATE TABLE
 CREATE TABLE
     Motoboy (
         cpf VARCHAR2(50),
-        cnh VARCHAR2(50),
+        cnh VARCHAR2(50) NOT NULL,
         cidade VARCHAR2(50),
         cpf_indicador VARCHAR2(50),
         CONSTRAINT motoboy_pk PRIMARY KEY (cpf),
@@ -69,6 +72,7 @@ CREATE TABLE
     );
 
 /
+
 CREATE TABLE
     Vendedor (
         email VARCHAR2(50),
@@ -99,6 +103,13 @@ CREATE TABLE
     );
 
 /
+
+/
+CREATE INDEX idx_item_preco ON 
+    Item(preco);
+
+/
+
 CREATE TABLE
     Favorita (
         email_vendedor VARCHAR2(50),
@@ -123,6 +134,12 @@ CREATE TABLE
         CONSTRAINT compra_motoboy_fk FOREIGN KEY (cpf_motoboy) REFERENCES Motoboy (cpf),
         CONSTRAINT compra_cupom_fk FOREIGN KEY (cod_cupom) REFERENCES Cupom (cod)
     );
+    
+/
+CREATE INDEX idx_compra_cupom ON 
+    Compra(cod_cupom);
+
+/
 
 /
 CREATE TABLE
