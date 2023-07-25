@@ -60,10 +60,10 @@ WHERE i.preco < ALL(SELECT i.preco FROM item i
 
 -- lista se o cupom vale ou não a pena ser utilizado baseado no desconto
 
-CREATE FUNCTION desconto (codigo_cupom IN cupom.codigo%type) RETURN VARCHAR2 IS
+/* CREATE FUNCTION desconto (codigo_cupom IN cupom.codigo%type) RETURN VARCHAR2 IS
     desconto_cupom cupom.desconto%type;
 BEGIN
-    SELECT i. into conc FROM cupom X WHERE c
+    SELECT i. into conc FROM cupom X WHERE c */
 
 -- adicionar o atributo nome na tabela cupom
 
