@@ -68,6 +68,7 @@ CREATE TABLE
         cnh VARCHAR2(50) NOT NULL,
         cidade VARCHAR2(50),
         cpf_indicador VARCHAR2(50),
+        selo VARCHAR2(10),
         CONSTRAINT motoboy_pk PRIMARY KEY (cpf),
         CONSTRAINT motoboy_motoboy_fk FOREIGN KEY (cpf_indicador) REFERENCES Motoboy (cpf)
     );
@@ -77,6 +78,7 @@ CREATE TABLE
 CREATE TABLE
     Vendedor (
         email VARCHAR2(50),
+        selo VARCHAR2(10),
         CONSTRAINT vendedor_pk PRIMARY KEY (email),
         CONSTRAINT vendedor_usuario_fk FOREIGN KEY (email) REFERENCES Usuario (email)
     );

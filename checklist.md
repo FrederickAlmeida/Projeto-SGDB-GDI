@@ -52,5 +52,5 @@
 | &check; |  USO DE PARAMETROS (IN, OUT ou IN OUT)  |
 | &check; |        CREATE OR REPLACE PACKAGE        |
 | &check; |     CREATE OR REPLACE PACKAGE BODY      |
-| &cross; |   CREATE OR REPLACE TRIGGER (COMANDO)   |
+| &check; |   CREATE OR REPLACE TRIGGER (COMANDO)   |
 | &check; |    CREATE OR REPLACE TRIGGER (LINHA)    |

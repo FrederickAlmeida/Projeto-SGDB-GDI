@@ -167,10 +167,7 @@ CREATE OR REPLACE PACKAGE BODY insercao_julgamento AS
 END insercao_julgamento;
 /
 
-
-
-
--- Trigger para por os selos com a venda:
+-- Trigger (em linha) para por o selo do vendedor ao inserir uma compra:
 --ALTER TABLE VENDEDOR ADD (SELO VARCHAR2(10));
 
 CREATE TRIGGER SELO_VENDEDOR_TG
@@ -192,30 +189,8 @@ BEGIN
 END;
 
 
--- trigger para por o selo do motoboy:
-CREATE TRIGGER SELO_MOTOBOY_TG
-AFTER INSERT ON COMPRA
-BEGIN
-    UPDATE MOTOBOY AS M
-        SET SELO = CASE
-        WHEN (
-            SELECT COUNT(*) FROM COMPRA
-            WHERE cpf_motoboy = M.email;
-        ) = 2 THEN 'BRONZE'
-
-        WHEN (
-            SELECT COUNT(*) FROM COMPRA
-            WHERE cpf_motoboy = M.email;
-        ) = 3 THEN 'PRATA'
-
-        WHEN (
-            SELECT COUNT(*) FROM COMPRA
-            WHERE cpf_motoboy = M.email;
-        ) = 5 THEN 'OURO'
-
-        ELSE SELO
-        END;
-END;
+-- Trigger (comando) para por os selos dos motoboys:
+--ALTER TABLE MOTOBOY ADD (SELO VARCHAR2(10));
 
 CREATE TRIGGER SELO_MOTOBOY_TG
 AFTER INSERT ON COMPRA
@@ -228,47 +203,15 @@ BEGIN
         SELECT COUNT(*) INTO T_VENDAS FROM COMPRA WHERE cpf_motoboy = MOTOBOY.cpf;
         UPDATE MOTOBOY
         SET SELO = CASE
-            WHEN T_VENDAS = 2 THEN 'BRONZE'
-            WHEN T_VENDAS = 3 THEN 'PRATA'
-            WHEN T_VENDAS = 5 THEN 'OURO'
+            WHEN T_VENDAS >= 1 AND T_VENDAS < 3 THEN 'BRONZE'
+            WHEN T_VENDAS >= 2 AND T_VENDAS < 5 THEN 'PRATA'
+            WHEN T_VENDAS >= 5 THEN 'OURO'
             ELSE SELO
         END
         WHERE cpf = MOTOBOY.cpf;
     END LOOP;
     
 END;
-
--- Trigger em linha motoboy
-
---ALTER TABLE MOTOBOY ADD (SELO VARCHAR2(10));
-DROP TRIGGER SELO_MOTOBOY_TG;
-CREATE TRIGGER SELO_MOTOBOY_TG
-AFTER INSERT ON COMPRA
-DECLARE
-    V_CPF_MOTOBOY COMPRA.CPF_MOTOBOY%TYPE;
-    T_ENTREGAS INT;
-BEGIN
-    SELECT CPF_MOTOBOY INTO V_CPF_MOTOBOY
-    FROM COMPRA
-    WHERE ROWID IN (
-        SELECT ROWID FROM INSERTED
-    );
-
-    SELECT COUNT(*) INTO T_ENTREGAS
-    FROM COMPRA WHERE CPF_MOTOBOY = V_CPF_MOTOBOY;
-
-    UPDATE MOTOBOY
-    SET SELO = CASE
-        WHEN T_ENTREGAS = 2 THEN 'BRONZE'
-        WHEN T_ENTREGAS = 3 THEN 'PRATA'
-        WHEN T_ENTREGAS = 5 THEN 'OURO'
-        ELSE SELO
-    END
-    WHERE CPF = V_CPF_MOTOBOY;
-END;
-/
-
-
 -- printa os 3 itens mais caros e seus precos
 DECLARE
     TYPE lista_itens IS TABLE OF item%ROWTYPE INDEX BY BINARY_INTEGER;
