@@ -42,7 +42,12 @@ VALUES
 INSERT INTO
     Cupom (cod, desconto)
 VALUES
-    (543242, 13);
+    (69420, 45);
+
+INSERT INTO
+    Cupom (cod, desconto)
+VALUES
+    (543242, 40);
 
 -- Fim Cupom
 -- Inicio cartao de credito

@@ -34,7 +34,8 @@ CREATE TABLE
     Cupom (
         cod NUMBER,
         desconto NUMBER NOT NULL,
-        CONSTRAINT cupom_pk PRIMARY KEY (cod)
+        CONSTRAINT cupom_pk PRIMARY KEY (cod),
+        CONSTRAINT cupom_desconto_ck CHECK (desconto BETWEEN 1 AND 100)
     );
 
 /

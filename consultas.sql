@@ -1,3 +1,5 @@
+-- boa correção luiza e cynara <3
+
 -- preço médio de anúncio por vendedor, ordenado pelo preço médio, cujo preço médio é maior que 100
 SELECT u.nome, avg(i.preco) as preco_medio_anuncio FROM usuario u
 INNER JOIN vendedor v ON v.email = u.email
@@ -124,3 +126,19 @@ WHERE email_vendedor_anuncio = 'caiopossidio@gmail.com';
 select * from identificacao;
 /
 select * from catalogo_simplified;
+/
+-- Listar a interseção dos compradores e vendedores
+SELECT U.NOME, U.EMAIL
+FROM USUARIO U
+WHERE U.EMAIL IN (
+    SELECT C.EMAIL FROM COMPRADOR C
+    INTERSECT
+    SELECT V.EMAIL FROM VENDEDOR V
+);
+/
+--SELECIONAR O NOME DOS VENDEDORES DISTISTOS QUE ALGUMA DE SUAS VENDAS POSSUEM A NOTA IGUAL A ALGUMA AVALIAÇÃO DE MOTOBOY MAIOR QUE 7
+SELECT EMAIL_VENDEDOR, NOTA_ANUNCIO FROM AVALIA
+WHERE NOTA_ANUNCIO = ANY(
+	SELECT NOTA_MOTOBOY FROM AVALIA WHERE NOTA_MOTOBOY > 7
+);
+/
