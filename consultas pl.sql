@@ -53,7 +53,7 @@ END;
 
 DECLARE
     aux VARCHAR2(255);
-    codigo_c NUMBER := 434324;
+    codigo_c NUMBER := 204060;
 BEGIN
     aux := desconto(codigo_c);
     dbms_output.put_line(aux);
@@ -113,13 +113,6 @@ BEGIN
 END;
 /
 
-DECLARE
-	codinho NUMBER := 12;
-	descontinho NUMBER := 12;
-BEGIN
-	InsereCupom(codinho,descontinho);
-END;
-/
 -- procedimento para inserir um cupom
 CREATE OR REPLACE PROCEDURE InsereCupom(
     p_cod IN OUT Cupom.cod%TYPE,
@@ -128,6 +121,14 @@ CREATE OR REPLACE PROCEDURE InsereCupom(
 IS
 BEGIN   
     INSERT INTO Cupom(cod, desconto) VALUES (p_cod, p_desconto);
+END;
+/
+
+DECLARE
+	codinho NUMBER := 12;
+	descontinho NUMBER := 12;
+BEGIN
+	InsereCupom(codinho,descontinho);
 END;
 /
 -- package para inserir um cupom e ver se seu desconto é bom
