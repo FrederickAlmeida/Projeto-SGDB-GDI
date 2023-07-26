@@ -23,7 +23,7 @@ BEGIN
     END LOOP;
     
 
-    WHILE contador2 <= contador LOOP
+    WHILE contador2 < contador LOOP
         dbms_output.put_line('item: ' || vendidos(contador2).item_nome);
         dbms_output.put_line('valor: ' || vendidos(contador2).valor_venda);
         
