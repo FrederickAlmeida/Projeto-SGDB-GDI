@@ -58,17 +58,6 @@ WHERE i.preco < ALL(SELECT i.preco FROM item i
                     INNER JOIN usuario u ON u.email = c.email_vendedor
                     WHERE u.nome = 'Caio Possídio');
 
-
-
--- lista se o cupom vale ou não a pena ser utilizado baseado no desconto
-
-/* CREATE FUNCTION desconto (codigo_cupom IN cupom.codigo%type) RETURN VARCHAR2 IS
-    desconto_cupom cupom.desconto%type;
-BEGIN
-    SELECT i. into conc FROM cupom X WHERE c */
-
--- adicionar o atributo nome na tabela cupom
-
 /
 ALTER TABLE Cupom
 ADD nome VARCHAR2(20);
@@ -89,13 +78,13 @@ DELETE FROM Cupom
 WHERE cod = 666666;
 /
 
--- lista todos os itens que não tem descrição (descrição nula)
+-- lista todos os itens que tem descrição (descrição não nula)
 
 SELECT *
 FROM Item
 WHERE descricao IS NOT NULL
 
--- lista todos os usuários que também são compradores e seus números de cartões de crédito
+-- lista os nomes de todos os usuários e seus números de cartões de crédito caso forem compradores
 
 SELECT U.nome, C.num_cartao
 FROM Usuario U LEFT OUTER JOIN Comprador C
@@ -136,7 +125,7 @@ WHERE U.EMAIL IN (
     SELECT V.EMAIL FROM VENDEDOR V
 );
 /
---SELECIONAR O NOME DOS VENDEDORES DISTISTOS QUE ALGUMA DE SUAS VENDAS POSSUEM A NOTA IGUAL A ALGUMA AVALIAÇÃO DE MOTOBOY MAIOR QUE 7
+--LISTA O EMAIL DO VENDEDOR E AS NOTAS DO ANÚNCIOS CASO ALGUMA DE SUAS VENDAS POSSUA A AVALIAÇÃO DE MOTOBOY MAIOR QUE 7
 SELECT EMAIL_VENDEDOR, NOTA_ANUNCIO FROM AVALIA
 WHERE NOTA_ANUNCIO = ANY(
 	SELECT NOTA_MOTOBOY FROM AVALIA WHERE NOTA_MOTOBOY > 7
