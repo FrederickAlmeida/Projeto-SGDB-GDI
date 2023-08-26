@@ -14,9 +14,6 @@ CREATE OR REPLACE TYPE tp_fone AS OBJECT(
 );
 /
 
-CREATE OR REPLACE TYPE tp_nt_fone AS TABLE OF tp_fone;
-/
-
 CREATE OR REPLACE TYPE tp_fones AS VARRAY(5) OF tp_fone;
 /
 
@@ -68,8 +65,37 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
 END;
 /
 
+CREATE OR REPLACE TYPE tp_anuncio AS OBJECT(
+    codigo NUMBER(5),
+    tipo VARCHAR2(50),
+    nome VARCHAR2(50),
+    descricao VARCHAR2(100),
+    preco NUMBER(5),
+
+    ORDER MEMBER FUNCTION e_maior (X tp_anuncio) RETURN NUMBER
+);
+/
+
+CREATE OR REPLACE TYPE BODY tp_anuncio AS
+    ORDER MEMBER FUNCTION e_maior (X tp_anuncio) RETURN NUMBER IS
+    BEGIN
+        IF SELF.preco > X.preco THEN
+            RETURN 1;
+        ELSIF SELF.preco < X.preco THEN
+            RETURN -1;
+        ELSE
+            RETURN 0;
+        END IF;
+    END;
+END;
+/
+
+CREATE OR REPLACE TYPE tp_nt_anuncio AS TABLE OF tp_anuncio;
+/
+
 CREATE OR REPLACE TYPE tp_vendedor UNDER tp_usuario(
     selo VARCHAR2(20),
+    lista_anuncios tp_nt_anuncio,
 
     MEMBER FUNCTION get_rank RETURN NUMBER,
     OVERRIDING MEMBER PROCEDURE exibir_detalhes (SELF tp_vendedor)
@@ -163,41 +189,9 @@ ALTER TYPE tp_motoboy
 ADD ATTRIBUTE (indicador REF tp_motoboy) CASCADE;
 /
 
-CREATE OR REPLACE TYPE tp_cupom AS OBJECT(
-    cod NUMBER(5),
-    desconto NUMBER(3)
-);
-/
-
--- aqui está do lado N da relação N:1
-CREATE OR REPLACE TYPE tp_anuncio AS OBJECT(
-    vendedor REF tp_vendedor,
-    codigo NUMBER(5),
-    tipo VARCHAR2(50),
-    nome VARCHAR2(50),
-    descricao VARCHAR2(100),
-    preco NUMBER(5),
-
-    ORDER MEMBER FUNCTION e_maior (X tp_anuncio) RETURN NUMBER
-);
-/
-
-CREATE OR REPLACE TYPE BODY tp_anuncio AS
-    ORDER MEMBER FUNCTION e_maior (X tp_anuncio) RETURN NUMBER IS
-    BEGIN
-        IF SELF.preco > X.preco THEN
-            RETURN 1;
-        ELSIF SELF.preco < X.preco THEN
-            RETURN -1;
-        ELSE
-            RETURN 0;
-        END IF;
-    END;
-END;
-/
-
 CREATE OR REPLACE TYPE tp_avaliar AS OBJECT(
-    anuncio REF tp_anuncio,
+    anuncio_cod NUMBER(5),
+    vendedor REF tp_vendedor,
     motoboy REF tp_motoboy,
     comprador REF tp_comprador,
     nota_anuncio NUMBER(1),
@@ -205,9 +199,16 @@ CREATE OR REPLACE TYPE tp_avaliar AS OBJECT(
 );
 /
 
--- mesma coisa do tipo a cima e o ngc do n:1 para no caso do motoboy e do cupom
+CREATE OR REPLACE TYPE tp_cupom AS OBJECT(
+    cod NUMBER(5),
+    desconto NUMBER(3)
+);
+/
+
 CREATE OR REPLACE TYPE tp_compra AS OBJECT(
-    anuncio REF tp_anuncio,
+    -- não conseguimos obter o anuncio como referencia, para passar no povoamento das tabelas compra e avalia, então botamos como number, só para não usar null :(
+    anuncio_cod  NUMBER(5),
+    vendedor REF tp_vendedor,
     comprador REF tp_comprador,
     motoboy REF tp_motoboy,
     cupom REF tp_cupom,
@@ -219,7 +220,7 @@ CREATE OR REPLACE TYPE tp_compra AS OBJECT(
 -- TABELAS
 CREATE TABLE tb_vendedor OF tp_vendedor(
     email PRIMARY KEY
-);
+)NESTED TABLE lista_anuncios STORE AS nt_anuncio;
 /
 
 CREATE TABLE tb_comprador OF tp_comprador(
@@ -229,7 +230,7 @@ CREATE TABLE tb_comprador OF tp_comprador(
 
 CREATE TABLE tb_motoboy OF tp_motoboy(
     cpf PRIMARY KEY,
-    indicador WITH ROWID REFERENCES tb_motoboy
+    indicador SCOPE IS tb_motoboy
 );
 /
 
@@ -237,27 +238,22 @@ CREATE TABLE tb_cupom OF tp_cupom(
     cod PRIMARY KEY
 );
 /
+
+CREATE TABLE tb_compra OF tp_compra(
+    comprador WITH ROWID REFERENCES tb_comprador,
+    motoboy WITH ROWID REFERENCES tb_motoboy,
+    cupom WITH ROWID REFERENCES tb_cupom
+);
+/
+
 CREATE TABLE tb_favorita OF tp_favorita(
     vendedor WITH ROWID REFERENCES tb_vendedor,
     comprador WITH ROWID REFERENCES tb_comprador
 );
 /
-CREATE TABLE tb_anuncio OF tp_anuncio(
-    vendedor SCOPE IS tb_vendedor
-);
-/
 CREATE TABLE tb_avaliar OF tp_avaliar(
-    anuncio WITH ROWID REFERENCES tb_anuncio,
+    vendedor WITH ROWID REFERENCES tb_vendedor,
     motoboy WITH ROWID REFERENCES tb_motoboy,
     comprador WITH ROWID REFERENCES tb_comprador  
 );
 /
-
-CREATE TABLE tb_compra OF tp_compra(
-    anuncio WITH ROWID REFERENCES tb_anuncio,
-    motoboy WITH ROWID REFERENCES tb_motoboy,
-    comprador WITH ROWID REFERENCES tb_comprador,
-    cupom WITH ROWID REFERENCES tb_cupom    
-);
-/
-

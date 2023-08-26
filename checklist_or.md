@@ -18,8 +18,8 @@
 | &check; |        WITH ROWID REFERENCES        |
 | &check; |                 REF                 |
 | &check; |              SCOPE IS               |
-| &cross; |             INSERT INTO             |
-| &cross; |                VALUE                |
+| &check; |             INSERT INTO             |
+| &check; |                VALUE                |
 | &check; |               VARRAY                |
 | &check; |            NESTED TABLE             |
 
