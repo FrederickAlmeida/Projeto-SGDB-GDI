@@ -105,11 +105,11 @@ CREATE OR REPLACE TYPE tp_vendedor UNDER tp_usuario(
 CREATE OR REPLACE TYPE BODY tp_vendedor AS
     MEMBER FUNCTION get_rank RETURN NUMBER IS
     BEGIN
-        IF SELF.selo = 'ouro' THEN
+        IF SELF.selo = 'Ouro' THEN
             RETURN 1;
-        ELSIF SELF.selo = 'prata' THEN
+        ELSIF SELF.selo = 'Prata' THEN
             RETURN 2;
-        ELSIF SELF.selo = 'bronze' THEN
+        ELSIF SELF.selo = 'Bronze' THEN
             RETURN 3;
         ELSE
             RETURN 4;
@@ -172,11 +172,11 @@ CREATE OR REPLACE TYPE tp_motoboy AS OBJECT(
 CREATE OR REPLACE TYPE BODY tp_motoboy AS
     MAP MEMBER FUNCTION qualidade RETURN NUMBER IS
     BEGIN
-        IF SELF.selo = 'ouro' THEN
+        IF SELF.selo = 'Ouro' THEN
             RETURN 1;
-        ELSIF SELF.selo = 'prata' THEN
+        ELSIF SELF.selo = 'Prata' THEN
             RETURN 2;
-        ELSIF SELF.selo = 'bronze' THEN
+        ELSIF SELF.selo = 'Bronze' THEN
             RETURN 3;
         ELSE
             RETURN 4;
