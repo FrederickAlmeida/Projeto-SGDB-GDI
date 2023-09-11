@@ -923,15 +923,6 @@ pessoas.insert_many([
         "esporte": "Natação"
     },
     {
-        "_id": 186,
-        "nome": "Ian Thorpe",
-        "idade": 39,
-        "sexo": "M",
-        "pais": "Austrália",
-        "tipo": "Atleta",
-        "esporte": "Natação"
-    },
-    {
         "_id": 137,
         "nome": "César Cielo",
         "idade": 34,
@@ -1000,7 +991,7 @@ pessoas.insert_many([
 
 pessoas.insert_many([
     {
-    "_id": 144,
+    "_id": 224,
     "nome": "Karch Kiraly",
     "idade": 60,
     "sexo": "M",
@@ -1009,7 +1000,7 @@ pessoas.insert_many([
     "esporte": "Voleibol"
     },
     {
-    "_id": 145,
+    "_id": 225,
     "nome": "Sergei Ovchinnikov",
     "idade": 59,
     "sexo": "M",
@@ -1018,7 +1009,7 @@ pessoas.insert_many([
     "esporte": "Voleibol"
     },
     {
-    "_id": 146,
+    "_id": 226,
     "nome": "José Roberto Guimarães",
     "idade": 67,
     "sexo": "M",
@@ -1027,7 +1018,7 @@ pessoas.insert_many([
     "esporte": "Voleibol"
     },
     {
-    "_id": 147,
+    "_id": 227,
     "nome": "Kumi Nakada",
     "idade": 62,
     "sexo": "F",
