@@ -923,7 +923,7 @@ pessoas.insert_many([
         "esporte": "Natação"
     },
     {
-        "_id": 136,
+        "_id": 186,
         "nome": "Ian Thorpe",
         "idade": 39,
         "sexo": "M",
@@ -1000,7 +1000,7 @@ pessoas.insert_many([
 
 pessoas.insert_many([
     {
-    "_id": 124,
+    "_id": 144,
     "nome": "Karch Kiraly",
     "idade": 60,
     "sexo": "M",
@@ -1009,7 +1009,7 @@ pessoas.insert_many([
     "esporte": "Voleibol"
     },
     {
-    "_id": 125,
+    "_id": 145,
     "nome": "Sergei Ovchinnikov",
     "idade": 59,
     "sexo": "M",
@@ -1018,7 +1018,7 @@ pessoas.insert_many([
     "esporte": "Voleibol"
     },
     {
-    "_id": 126,
+    "_id": 146,
     "nome": "José Roberto Guimarães",
     "idade": 67,
     "sexo": "M",
@@ -1027,7 +1027,7 @@ pessoas.insert_many([
     "esporte": "Voleibol"
     },
     {
-    "_id": 127,
+    "_id": 147,
     "nome": "Kumi Nakada",
     "idade": 62,
     "sexo": "F",
@@ -1251,7 +1251,7 @@ equipes.insert_many(
 # Volei
 equipes.insert_many([
     {
-        "_id": 1,
+        "_id": 9,
         "atletas": [doc for doc in pessoas.find(
             {"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Atleta"})],
         "tecnico": pessoas.find_one({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Técnico"}),
@@ -1259,7 +1259,7 @@ equipes.insert_many([
         "esporte" : "Voleibol"
     },
     {
-        "_id": 1,
+        "_id": 10,
         "atletas": [doc for doc in pessoas.find(
             {"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Atleta"})],
         "tecnico": pessoas.find_one({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Técnico"}),
@@ -1267,7 +1267,7 @@ equipes.insert_many([
         "esporte" : "Voleibol"
     },
     {
-        "_id": 1,
+        "_id": 11,
         "atletas": [doc for doc in pessoas.find(
             {"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Atleta"})],
         "tecnico": pessoas.find_one({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Técnico"}),
@@ -1275,7 +1275,7 @@ equipes.insert_many([
         "esporte" : "Voleibol"
     },
     {
-        "_id": 1,
+        "_id": 12,
         "atletas": [doc for doc in pessoas.find(
             {"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Atleta"})],
         "tecnico": pessoas.find_one({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Técnico"}),
