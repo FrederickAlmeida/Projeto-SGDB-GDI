@@ -517,6 +517,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "Brasil",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
         {
             "_id": 1002,
@@ -525,6 +526,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "Portugal",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
         {
             "_id": 1003,
@@ -533,6 +535,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "Argentina",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
         {
             "_id": 1004,
@@ -541,6 +544,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "Estados Unidos",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
         {
             "_id": 1005,
@@ -549,6 +553,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "França",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
         {
             "_id": 1006,
@@ -557,6 +562,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "Japão",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
         {
             "_id": 1007,
@@ -565,6 +571,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "Uruguai",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
         {
             "_id": 1008,
@@ -573,6 +580,7 @@ pessoas.insert_many(
             "sexo": "M",
             "pais": "Gana",
             "tipo": "Técnico",
+            "esporte": "Futebol",
         },
     ]   
 )
