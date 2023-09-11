@@ -1,19 +1,12 @@
-from pymongo import MongoClient
+// selecionando a db
 
-# Conexão com o banco de dados
-client: MongoClient = MongoClient("localhost", 27017)
+use olimpiadas_db
 
-# Selecionando o banco de dados
-db = client["olimpiadas_db"]
-client.drop_database(db)
+// Inserindo atletas (1-1000)
+// Futebolistas
 
-# Selecionando a coleção
-pessoas = db["pessoas_tabela"]
 
-# Inserindo atletas (1-1000)
-
-# Futebolistas
-pessoas.insert_many(
+db.pessoas_tabela.insertMany(
     [
         {
             "_id": 1,
@@ -503,12 +496,11 @@ pessoas.insert_many(
             "tipo": "Atleta",
             "esporte": "Surfe",
         },
-               
     ]
 )
 
-# Inserindo tecnicos de Futebol (1001-1009)
-pessoas.insert_many(
+// Inserindo tecnicos de Futebol (1001-1009)
+db.pessoas_tabela.insertMany(
     [
         {
             "_id": 1001,
@@ -585,9 +577,9 @@ pessoas.insert_many(
     ]   
 )
 
-# Inserindo jogadoras de volei (id 100-123)
+// Inserindo jogadoras de volei (id 100-123)
 
-pessoas.insert_many([
+db.pessoas_tabela.insertMany([
     {
     "_id": 100,
     "nome": "Jaqueline Carvalho",
@@ -806,9 +798,9 @@ pessoas.insert_many([
     }
 ])
 
-# Inserindo Atletas de Atletismo
+// Inserindo Atletas de Atletismo
 
-pessoas.insert_many([
+db.pessoas_tabela.insertMany([
     {
         "_id": 124,
         "nome": "Usain Bolt",
@@ -901,9 +893,9 @@ pessoas.insert_many([
     }
 ])
 
-# Inserindo Atletas de Natacao
+// Inserindo Atletas de Natacao
 
-pessoas.insert_many([
+db.pessoas_tabela.insertMany([
     {
         "_id": 134,
         "nome": "Michael Phelps",
@@ -996,9 +988,9 @@ pessoas.insert_many([
     }
 ])
 
-# Inserindo técnicos de Volei
+// Inserindo técnicos de Volei
 
-pessoas.insert_many([
+db.pessoas_tabela.insertMany([
     {
     "_id": 224,
     "nome": "Karch Kiraly",
@@ -1037,8 +1029,8 @@ pessoas.insert_many([
     }
 ])
 
-# Inserindo funcionarios de emissoras
-pessoas.insert_many(
+// Inserindo funcionarios de db.emissoras_tabela
+db.pessoas_tabela.insertMany(
     [
         {
             "_id": 2001,
@@ -1173,168 +1165,193 @@ pessoas.insert_many(
     ]
 )
 
-# Equipes
+// db.equipes_tabela
 
-# Selecionando a coleção
-equipes = db["equipes_tabela"]
+// Times de Futebol
 
-# Times de Futebol
-equipes.insert_many(
+const atletasBrasil = db.pessoas_tabela.find({"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoBrasil = db.pessoas_tabela.findOne({"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Técnico"});
+const atletasAlemanha = db.pessoas_tabela.find({"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoAlemanha = db.pessoas_tabela.findOne({"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Técnico"});
+const atletasArgentina = db.pessoas_tabela.find({"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoArgentina = db.pessoas_tabela.findOne({"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Técnico"});
+const atletasPortugal = db.pessoas_tabela.find({"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoPortugal = db.pessoas_tabela.findOne({"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Técnico"});
+const atletasGana = db.pessoas_tabela.find({"pais": "Gana", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoGana = db.pessoas_tabela.findOne({"pais": "Gana", "esporte" : "Futebol", "tipo" : "Técnico"});
+const atletasUruguai = db.pessoas_tabela.find({"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoUruguai = db.pessoas_tabela.findOne({"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Técnico"});
+const atletasJapao = db.pessoas_tabela.find({"pais": "Japão", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoJapao = db.pessoas_tabela.findOne({"pais": "Japão", "esporte" : "Futebol", "tipo" : "Técnico"});
+const atletasEUA = db.pessoas_tabela.find({"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+const tecnicoEUA = db.pessoas_tabela.findOne({"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Técnico"});
+
+
+db.equipes_tabela.insertMany(
     [
         {
             "_id": 1,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasBrasil,
+            "tecnico": tecnicoBrasil,
             "pais": "Brasil",
             "esporte" : "Futebol"
         },
         {
             "_id": 2,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasAlemanha,
+            "tecnico": tecnicoAlemanha,
             "pais": "Alemanha",
             "esporte" : "Futebol"
         },
         {
             "_id": 3,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasArgentina,
+            "tecnico": tecnicoArgentina,
             "pais": "Argentina",
             "esporte" : "Futebol"
         },
         {
             "_id": 4,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasPortugal,
+            "tecnico": tecnicoPortugal,
             "pais": "Portugal",
             "esporte" : "Futebol"
         },
         {
             "_id": 5,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Gana", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Gana", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasGana,
+            "tecnico": tecnicoGana,
             "pais": "Gana",
             "esporte" : "Futebol"
         },
         {
             "_id": 6,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasUruguai,
+            "tecnico": tecnicoUruguai,
             "pais": "Uruguai",
             "esporte" : "Futebol"
         },
         {
             "_id": 7,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Japão", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Japão", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasJapao,
+            "tecnico": tecnicoJapao,
             "pais": "Japão",
             "esporte" : "Futebol"
         },
         {
             "_id": 8,
-            "atletas": [doc for doc in pessoas.find(
-                {"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Atleta"})],
-            "tecnico": pessoas.find_one({"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Técnico"}),
+            "atletas": atletasEUA,
+            "tecnico": tecnicoEUA,
             "pais": "Estados Unidos",
             "esporte" : "Futebol"
         },
     ]
 )
 
-# Volei
-equipes.insert_many([
+// Times de Volei
+
+const atletasBrasilVolei = db.pessoas_tabela.find({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+const tecnicoBrasilVolei = db.pessoas_tabela.findOne({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Técnico"});
+const atletasEUAVolei = db.pessoas_tabela.find({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+const tecnicoEUAVolei = db.pessoas_tabela.findOne({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Técnico"});
+const atletasJapaoVolei = db.pessoas_tabela.find({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+const tecnicoJapaoVolei = db.pessoas_tabela.findOne({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Técnico"});
+const atletasRussiaVolei = db.pessoas_tabela.find({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+const tecnicoRussiaVolei = db.pessoas_tabela.findOne({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Técnico"});
+
+
+// Volei
+db.equipes_tabela.insertMany([
     {
         "_id": 9,
-        "atletas": [doc for doc in pessoas.find(
-            {"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Atleta"})],
-        "tecnico": pessoas.find_one({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Técnico"}),
+        "atletas": atletasBrasilVolei,
+        "tecnico": tecnicoBrasilVolei,
         "pais": "Brasil",
         "esporte" : "Voleibol"
     },
     {
         "_id": 10,
-        "atletas": [doc for doc in pessoas.find(
-            {"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Atleta"})],
-        "tecnico": pessoas.find_one({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Técnico"}),
+        "atletas": atletasEUAVolei,
+        "tecnico": tecnicoEUAVolei,
         "pais": "Estados Unidos",
         "esporte" : "Voleibol"
     },
     {
         "_id": 11,
-        "atletas": [doc for doc in pessoas.find(
-            {"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Atleta"})],
-        "tecnico": pessoas.find_one({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Técnico"}),
+        "atletas": atletasJapaoVolei,
+        "tecnico": tecnicoJapaoVolei,
         "pais": "Japão",
         "esporte" : "Voleibol"
     },
     {
         "_id": 12,
-        "atletas": [doc for doc in pessoas.find(
-            {"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Atleta"})],
-        "tecnico": pessoas.find_one({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Técnico"}),
+        "atletas": atletasRussiaVolei,
+        "tecnico": tecnicoRussiaVolei,
         "pais": "Rússia",
         "esporte" : "Voleibol"
     }
 ])
 
-# Emissoras
+// db.emissoras_tabela
 
-emissoras = db["emissoras_tabela"]
+// Emissoras de TV
 
-emissoras.insert_many(
+const narradorSportv = db.pessoas_tabela.findOne({"emissora": "SporTV", "cargo": "Narrador"});
+const reporteresSportv = db.pessoas_tabela.find({"emissora": "SporTV", "cargo": "Repórter"}).toArray();
+const comentaristasSportv = db.pessoas_tabela.find({"emissora": "SporTV", "cargo": "Comentarista"}).toArray();
+const narradorTNT = db.pessoas_tabela.findOne({"emissora": "TNT", "cargo": "Narrador"});
+const reporteresTNT = db.pessoas_tabela.find({"emissora": "TNT", "cargo": "Repórter"}).toArray();
+const comentaristasTNT = db.pessoas_tabela.find({"emissora": "TNT", "cargo": "Comentarista"}).toArray();
+const narradorESPN = db.pessoas_tabela.findOne({"emissora": "ESPN", "cargo": "Narrador"});
+const reporteresESPN = db.pessoas_tabela.find({"emissora": "ESPN", "cargo": "Repórter"}).toArray();
+const comentaristasESPN = db.pessoas_tabela.find({"emissora": "ESPN", "cargo": "Comentarista"}).toArray();
+
+
+db.emissoras_tabela.insertMany(
     [
         {
             "_id" : 1,
             "nome" : "SporTV",
-            "narrador" : pessoas.find_one({"emissora": "SporTV", "cargo": "Narrador"}),
-            "reporteres" : [doc for doc in pessoas.find(
-                {"emissora": "SporTV", "cargo": "Repórter"})],
-            "comentaristas" : [doc for doc in pessoas.find(
-                {"emissora": "SporTV", "cargo": "Comentarista"})],
+            "narrador" : narradorSportv,
+            "reporteres" : reporteresSportv,
+            "comentaristas" : comentaristasSportv,
         },
         {
             "_id" : 2,
             "nome" : "TNT",
-            "narrador" : pessoas.find_one({"emissora": "TNT", "cargo": "Narrador"}),
-            "reporteres" : [doc for doc in pessoas.find(
-                {"emissora": "TNT", "cargo": "Repórter"})],
-            "comentaristas" : [doc for doc in pessoas.find(
-                {"emissora": "TNT", "cargo": "Comentarista"})],
+            "narrador" : narradorTNT,
+            "reporteres" : reporteresTNT,
+            "comentaristas" : comentaristasTNT,
         },
         {
             "_id" : 3,
             "nome" : "ESPN",
-            "narrador" : pessoas.find_one({"emissora": "ESPN", "cargo": "Narrador"}),
-            "reporteres" : [doc for doc in pessoas.find(
-                {"emissora": "ESPN", "cargo": "Repórter"})],
-            "comentaristas" : [doc for doc in pessoas.find(
-                {"emissora": "ESPN", "cargo": "Comentarista"})],
+            "narrador" : narradorESPN,
+            "reporteres" : reporteresESPN,
+            "comentaristas" : comentaristasESPN,
         },
 ])
 
-# Partida
+// Partida
 
-partidas = db["partidas_tabela"]
 
-# Jogos de Futebol
-partidas.insert_many([
+
+
+
+//
+
+// Jogos de Futebol
+db.partidas_tabela.insertMany([
     {   
         "_id" : 1,
         "nome" : "Futebol - Quartas Final - Brasil x EUA",
         "datahora_inicio" : "20:00 10/10/2023",
         "datahora_fim" : "22:00 10/10/2023",
         "cidade" : "Rio de Janeiro",
-        "competidores" : [equipes.find_one({"pais": "Brasil", "esporte": "Futebol"}), equipes.find_one({"pais": "Estados Unidos", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Estados Unidos", "esporte": "Futebol"})],
         "estadio" : "Maracana",
         "qnt_espectadores" : 68000,
-        "vencedor" : equipes.find_one({"pais": "Brasil", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Futebol"})
     },
     {
         "_id" : 2,
@@ -1342,10 +1359,10 @@ partidas.insert_many([
         "datahora_inicio" : "10:00 11/10/2023",
         "datahora_fim" : "12:00 11/10/2023",
         "cidade" : "São Paulo",
-        "competidores" : [equipes.find_one({"pais": "Gana", "esporte": "Futebol"}), equipes.find_one({"pais": "Argentina", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Gana", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Argentina", "esporte": "Futebol"})],
         "estadio" : "Alianz Arena",
         "qnt_espectadores" : 60000,
-        "vencedor" : equipes.find_one({"pais": "Argentina", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Argentina", "esporte": "Futebol"})
     },
     {
         "_id" : 3,
@@ -1353,10 +1370,10 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 11/10/2023",
         "datahora_fim" : "18:00 11/10/2023",
         "cidade" : "Recife",
-        "competidores" : [equipes.find_one({"pais": "Franca", "esporte": "Futebol"}), equipes.find_one({"pais": "Japão", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Franca", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Futebol"})],
         "estadio" : "Ilha do Retiro",
         "qnt_espectadores" : 68000,
-        "vencedor" : equipes.find_one({"pais": "Japão", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Futebol"})
     },
     {
         "_id" : 4,
@@ -1364,10 +1381,10 @@ partidas.insert_many([
         "datahora_inicio" : "22:00 12/10/2023",
         "datahora_fim" : "00:00 13/10/2023",
         "cidade" : "Fortaleza",
-        "competidores" : [equipes.find_one({"pais": "Uruguai", "esporte": "Futebol"}), equipes.find_one({"pais": "Portugal", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Uruguai", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Portugal", "esporte": "Futebol"})],
         "estadio" : "Castelao",
         "qnt_espectadores" : 68000,
-        "vencedor" : equipes.find_one({"pais": "Portugal", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Portugal", "esporte": "Futebol"})
     },
     {
         "_id" : 5,
@@ -1375,10 +1392,10 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 18/10/2023",
         "datahora_fim" : "18:00 18/10/2023",
         "cidade" : "Sao Paulo",
-        "competidores" : [equipes.find_one({"pais": "Brasil", "esporte": "Futebol"}), equipes.find_one({"pais": "Portugal", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Portugal", "esporte": "Futebol"})],
         "estadio" : "Pacaembu",
         "qnt_espectadores" : 48000,
-        "vencedor" : equipes.find_one({"pais": "Brasil", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Futebol"})
     },
     {
         "_id" : 6,
@@ -1386,10 +1403,10 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 20/10/2023",
         "datahora_fim" : "18:00 20/10/2023",
         "cidade" : "Rio de Janeiro",
-        "competidores" : [equipes.find_one({"pais": "Argentina", "esporte": "Futebol"}), equipes.find_one({"pais": "Japão", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Argentina", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Futebol"})],
         "estadio" : "Maracana",
         "qnt_espectadores" : 68000,
-        "vencedor" : equipes.find_one({"pais": "Japão", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Futebol"})
     },
     {
         "_id" : 7,
@@ -1397,11 +1414,11 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 25/10/2023",
         "datahora_fim" : "18:00 25/10/2023",
         "cidade" : "Fortaleza",
-        "competidores" : [equipes.find_one({"pais": "Argentina", "esporte": "Futebol"}), equipes.find_one({"pais": "Portugal", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Argentina", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Portugal", "esporte": "Futebol"})],
         "estadio" : "Castelao",
         "qnt_espectadores" : 68000,
-        "vencedor" : equipes.find_one({"pais": "Argentina", "esporte": "Futebol"}),
-        "medalha_bronze" : equipes.find_one({"pais": "Argentina", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Argentina", "esporte": "Futebol"}),
+        "medalha_bronze" : db.equipes_tabela.findOne({"pais": "Argentina", "esporte": "Futebol"})
     },
     {
         "_id" : 8,
@@ -1409,28 +1426,28 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 27/10/2023",
         "datahora_fim" : "18:00 27/10/2023",
         "cidade" : "Fortaleza",
-        "competidores" : [equipes.find_one({"pais": "Brasil", "esporte": "Futebol"}), equipes.find_one({"pais": "Japão", "esporte": "Futebol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Futebol"}), db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Futebol"})],
         "estadio" : "Castelao",
         "qnt_espectadores" : 68000,
-        "vencedor" : equipes.find_one({"pais": "Japão", "esporte": "Futebol"}),
-        "medalha_prata" : equipes.find_one({"pais": "Brasil", "esporte": "Futebol"}),
-        "medalha_ouro" : equipes.find_one({"pais": "Japão", "esporte": "Futebol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Futebol"}),
+        "medalha_prata" : db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Futebol"}),
+        "medalha_ouro" : db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Futebol"})
     },
 ])
 
-# Jogos de Volei
+// Jogos de Volei
 
-partidas.insert_many([
+db.partidas_tabela.insertMany([
     {
         "_id" : 9,
         "nome" : "Volei - Semi-Final - Brasil x Japão",
         "datahora_inicio" : "16:00 12/10/2023",
         "datahora_fim" : "18:00 12/10/2023",
         "cidade" : "Recife",
-        "competidores" : [equipes.find_one({"pais": "Brasil", "esporte": "Voleibol"}), equipes.find_one({"pais": "Japão", "esporte": "Voleibol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Voleibol"}), db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Voleibol"})],
         "estadio" : "Geraldao",
         "qnt_espectadores" : 30000,
-        "vencedor" : equipes.find_one({"pais": "Japão", "esporte": "Voleibol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Voleibol"})
     },
     {
         "_id" : 10,
@@ -1438,10 +1455,10 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 13/10/2023",
         "datahora_fim" : "18:00 13/10/2023",
         "cidade" : "Recife",
-        "competidores" : [equipes.find_one({"pais": "Estados Unidos", "esporte": "Voleibol"}), equipes.find_one({"pais": "Rússia", "esporte": "Voleibol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Estados Unidos", "esporte": "Voleibol"}), db.equipes_tabela.findOne({"pais": "Rússia", "esporte": "Voleibol"})],
         "estadio" : "Geraldao",
         "qnt_espectadores" : 20000,
-        "vencedor" : equipes.find_one({"pais": "Estados Unidos", "esporte": "Voleibol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Estados Unidos", "esporte": "Voleibol"})
     },
     {
         "_id" : 11,
@@ -1449,11 +1466,11 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 16/10/2023",
         "datahora_fim" : "18:00 16/10/2023",
         "cidade" : "Recife",
-        "competidores" : [equipes.find_one({"pais": "Japão", "esporte": "Voleibol"}), equipes.find_one({"pais": "Rússia", "esporte": "Voleibol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Voleibol"}), db.equipes_tabela.findOne({"pais": "Rússia", "esporte": "Voleibol"})],
         "estadio" : "Geraldao",
         "qnt_espectadores" : 24000,
-        "vencedor" : equipes.find_one({"pais": "Japão", "esporte": "Voleibol"}),
-        "medalha_bronze" : equipes.find_one({"pais": "Japão", "esporte": "Voleibol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Voleibol"}),
+        "medalha_bronze" : db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Voleibol"})
     },
     {
         "_id" : 12,
@@ -1461,29 +1478,33 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 18/10/2023",
         "datahora_fim" : "18:00 18/10/2023",
         "cidade" : "Recife",
-        "competidores" : [equipes.find_one({"pais": "Japão", "esporte": "Voleibol"}), equipes.find_one({"pais": "Estados Unidos", "esporte": "Voleibol"})],
+        "competidores" : [db.equipes_tabela.findOne({"pais": "Japão", "esporte": "Voleibol"}), db.equipes_tabela.findOne({"pais": "Estados Unidos", "esporte": "Voleibol"})],
         "estadio" : "Geraldao",
         "qnt_espectadores" : 36000,
-        "vencedor" : equipes.find_one({"pais": "Brasil", "esporte": "Voleibol"}),
-        "medalha_prata" : equipes.find_one({"pais": "Estados Unidos", "esporte": "Voleibol"}),
-        "medalha_ouro" : equipes.find_one({"pais": "Brasil", "esporte": "Voleibol"})
+        "vencedor" : db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Voleibol"}),
+        "medalha_prata" : db.equipes_tabela.findOne({"pais": "Estados Unidos", "esporte": "Voleibol"}),
+        "medalha_ouro" : db.equipes_tabela.findOne({"pais": "Brasil", "esporte": "Voleibol"})
     }
 ])
 
-# Competicoes Individuais
-partidas.insert_many([
+// COMPETIÇÕES INDIVIDUAIS
+
+let findAtletismo = db.pessoas_tabela.find({"tipo": "Atleta","esporte": "Atletismo"}).toArray()
+let findNatacao = db.pessoas_tabela.find({"tipo": "Atleta","esporte": "Natação"}).toArray()
+
+db.partidas_tabela.insertMany([
     {
         "_id" : 13,
         "nome" : "Atletismo",
         "datahora_inicio" : "16:00 23/10/2023",
         "datahora_fim" : "18:00 23/10/2023",
         "cidade" : "Rio de Janeiro",
-        "competidores" : [doc for doc in pessoas.find({"tipo": "Atleta","esporte": "Atletismo"})],
+        "competidores" : findAtletismo,
         "estadio" : "Maracana",
         "qnt_espectadores" : 60000,
-        "medalha_ouro" : equipes.find_one({"nome": "Usain Bolt"}),
-        "medalha_prata" : equipes.find_one({"nome": "Shelly-Ann Fraser-Pryce"}),
-        "medalha_bronze" : equipes.find_one({"nome": "Elaine Thompson-Herah"})
+        "medalha_ouro" : db.equipes_tabela.findOne({"nome": "Usain Bolt"}),
+        "medalha_prata" : db.equipes_tabela.findOne({"nome": "Shelly-Ann Fraser-Pryce"}),
+        "medalha_bronze" : db.equipes_tabela.findOne({"nome": "Elaine Thompson-Herah"})
     },
     {
         "_id" : 14,
@@ -1491,108 +1512,105 @@ partidas.insert_many([
         "datahora_inicio" : "16:00 24/10/2023",
         "datahora_fim" : "18:00 24/10/2023",
         "cidade" : "Recife",
-        "competidores" : [doc for doc in pessoas.find({"tipo": "Atleta","esporte": "Natação"})],
+        "competidores" : findNatacao,
         "estadio" : "Geraldao",
         "qnt_espectadores" : 20000,
-        "medalha_ouro" : equipes.find_one({"nome": "César Cielo"}),
-        "medalha_prata" : equipes.find_one({"nome": "Michael Phelps"}),
-        "medalha_bronze" : equipes.find_one({"nome": "Ryan Lochte"})
+        "medalha_ouro" : db.equipes_tabela.findOne({"nome": "César Cielo"}),
+        "medalha_prata" : db.equipes_tabela.findOne({"nome": "Michael Phelps"}),
+        "medalha_bronze" : db.equipes_tabela.findOne({"nome": "Ryan Lochte"})
     }
 ])
+// Inserindo db.transmissoes_tabela
 
-# Inserindo Transmissoes
-
-transmissoes = db["transmissoes_tabela"]
-
-transmissoes.insert_many([
+db.transmissoes_tabela.insertMany([
     {
         "_id" : 1,
-        "partida" : partidas.find_one({"nome": "Futebol - Quartas Final - Brasil x EUA"}),
-        "emissora" : emissoras.find_one({"nome" : "ESPN"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Quartas Final - Brasil x EUA"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "ESPN"})
     },
     {
         "_id" : 2,
-        "partida" : partidas.find_one({"nome": "Futebol - Quartas Final - Brasil x EUA"}),
-        "emissora" : emissoras.find_one({"nome" : "TNT"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Quartas Final - Brasil x EUA"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "TNT"})
     },
     {
         "_id" : 3,
-        "partida" : partidas.find_one({"nome": "Futebol - Quartas Final - Franca x Japão"}),
-        "emissora" : emissoras.find_one({"nome" : "ESPN"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Quartas Final - Franca x Japão"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "ESPN"})
     },
     {
         "_id" : 4,
-        "partida" : partidas.find_one({"nome": "Futebol - Quartas Final - Uruguai x Portugal"}),
-        "emissora" : emissoras.find_one({"nome" : "TNT"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Quartas Final - Uruguai x Portugal"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "TNT"})
     },
     {
         "_id" : 5,
-        "partida" : partidas.find_one({"nome": "Futebol - Quartas Final - Gana x Argentina"}),
-        "emissora" : emissoras.find_one({"nome" : "ESPN"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Quartas Final - Gana x Argentina"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "ESPN"})
     },
     {
         "_id" : 6,
-        "partida" : partidas.find_one({"nome": "Futebol - Semi-Final - Brasil x Portugal"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Semi-Final - Brasil x Portugal"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 7,
-        "partida" : partidas.find_one({"nome": "Futebol - Semi-Final - Argentina x Japao"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Semi-Final - Argentina x Japao"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 8,
-        "partida" : partidas.find_one({"nome" : "Futebol - Bronze - Argentina x Portugal"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome" : "Futebol - Bronze - Argentina x Portugal"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 9,
-        "partida" : partidas.find_one({"nome": "Futebol - Final - Brasil x Japão"}),
-        "emissora" : emissoras.find_one({"nome" : "ESPN"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Final - Brasil x Japão"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "ESPN"})
     },
     {
         "_id" : 10,
-        "partida" : partidas.find_one({"nome": "Futebol - Final - Brasil x Japão"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Futebol - Final - Brasil x Japão"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 11,
-        "partida" : partidas.find_one({"nome": "Volei - Semi-Final - Brasil x Japão"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Volei - Semi-Final - Brasil x Japão"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 12,
-        "partida" : partidas.find_one({"nome": "Volei - Semi-Final - EUA x Rússia"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Volei - Semi-Final - EUA x Rússia"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 13,
-        "partida" : partidas.find_one({"nome": "Volei - Semi-Final - Brasil x Japão"}),
-        "emissora" : emissoras.find_one({"nome" : "TNT"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Volei - Semi-Final - Brasil x Japão"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "TNT"})
     },
     {
         "_id" : 14,
-        "partida" : partidas.find_one({"nome": "Volei - Bronze - Rússia x Japão"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Volei - Bronze - Rússia x Japão"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 15,
-        "partida" : partidas.find_one({"nome": "Volei - Final - Brasil x EUA"}),
-        "emissora" : emissoras.find_one({"nome" : "SporTV"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Volei - Final - Brasil x EUA"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "SporTV"})
     },
     {
         "_id" : 16,
-        "partida" : partidas.find_one({"nome": "Volei - Final - Brasil x EUA"}),
-        "emissora" : emissoras.find_one({"nome" : "TNT"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Volei - Final - Brasil x EUA"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "TNT"})
     },
     {
         "_id" : 17,
-        "partida" : partidas.find_one({"nome": "Atletismo"}),
-        "emissora" : emissoras.find_one({"nome" : "ESPN"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Atletismo"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "ESPN"})
     },
     {
         "_id" : 18,
-        "partida" : partidas.find_one({"nome": "Natação"}),
-        "emissora" : emissoras.find_one({"nome" : "ESPN"})
+        "partida" : db.partidas_tabela.findOne({"nome": "Natação"}),
+        "emissora" : db.emissoras_tabela.findOne({"nome" : "ESPN"})
     }  
 ])
