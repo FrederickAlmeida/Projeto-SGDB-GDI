@@ -1,6 +1,6 @@
+// Boa correção Luiza e Cynara <3 – Ass.. Ian Gabriel Braga Trinta e Felipe Neiva
 
-// Boa correção Luiza e Cynara <3 – Ass.. Ian Gabriel Braga Trinta e Felipe Neiva	
-
+use('olimpiadas_db');
 // Selecionando todas as pessoas participantes das olimpíadas(atletas, técnicos e funcionários de emissoras)
 
 db.pessoas_tabela.find()
