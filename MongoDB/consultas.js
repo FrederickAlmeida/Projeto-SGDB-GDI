@@ -1,16 +1,13 @@
 // Boa correção Luiza e Cynara <3 – Ass.. Ian Gabriel Braga Trinta e Felipe Neiva
-
 use('olimpiadas_db');
-// Selecionando todas as pessoas participantes das olimpíadas(atletas, técnicos e funcionários de emissoras)
 
+// Selecionando todas as pessoas participantes das olimpíadas(atletas, técnicos e funcionários de emissoras)
 db.pessoas_tabela.find()
 
 //  Selecionando todas as equipes com 4 atletas usando $size
-
 db.equipes_tabela.find({"atletas": {"$size": 4}})
 
 // Agrupando todos os atletas brasileiros e calculando a média de idade
-
 db.pessoas_tabela.aggregate([
     {
         $match: {
@@ -27,7 +24,6 @@ db.pessoas_tabela.aggregate([
 ])
 
 // Selecionando todos os atletas sem mostrar id e tipo
-
 db.pessoas_tabela.aggregate([
     {
         $match: {
@@ -43,11 +39,9 @@ db.pessoas_tabela.aggregate([
 ])
 
 // Selecionando os atletas com 40 anos ou mais
-
 db.pessoas_tabela.find({"tipo": "Atleta", "idade": {"$gte": 40}})
 
 // Selecionando a soma do salário dos funcionários do sportv
-
 db.pessoas_tabela.aggregate([
     {
         $match: {
@@ -62,10 +56,7 @@ db.pessoas_tabela.aggregate([
     }
 ])
 
-
-
 // Contando quantos técnicos existem 
-
 db.pessoas_tabela.countDocuments({"tipo": "Técnico"})
 
 // Selecionando a idade máxima de um técnico
@@ -134,27 +125,10 @@ db.partidas_tabela.find({"competidores": {"$all": [db.equipes_tabela.findOne({"p
 
 db.pessoas_tabela.aggregate([{$project: {nome: 1,idade: 1,faixa_etaria: {$cond: {if: { $gte: ["$idade", 18] },then: "Adulto",else: "Menor de Idade" }}}}])
 
-
-
-
-
 // renomeando a tabela transmissoes
-
 db.transmissoes_tabela.renameCollection("tabela_transmissoes")
 
-
-// pretty ( não testei )
-// Era infinitamente melhor inserindo o Matheus Baneyr
-// muda ue
-//fica bonito, é sério, muda sim
-//MUDA
-//ARROMBADO
-
-
 // selecionando o Lionel Messi
-// Neiva, tá certo isso, fala p fred printar com e sem, pq aparentemente no shell sem o pretty ele posta o JSON tudo na mesma linha, e com o pretty fica json, 
-
-
 db.pessoas_tabela.find({"nome": "Lionel Messi"}).pretty()
 
 // pega a cidade e printa a quantidade de espectadores
