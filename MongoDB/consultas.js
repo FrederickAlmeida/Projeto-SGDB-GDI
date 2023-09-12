@@ -157,5 +157,17 @@ db.transmissoes_tabela.renameCollection("tabela_transmissoes")
 
 db.pessoas_tabela.find({"nome": "Lionel Messi"}).pretty()
 
-
+// pega a cidade e printa a quantidade de espectadores
+db.partidas_tabela.mapReduce(
+    function() {
+       emit(this.cidade, this.qnt_espectadores);
+    },
+    function(key, values) {
+       return Array.sum(values);
+    },
+    {
+       query: { "competidores.esporte": "Futebol" },
+       out: "total_spectators_by_city"
+    }
+)
 
