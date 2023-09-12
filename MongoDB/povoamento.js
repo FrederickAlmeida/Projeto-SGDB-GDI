@@ -1169,22 +1169,22 @@ db.pessoas_tabela.insertMany(
 
 // Times de Futebol
 
-const atletasBrasil = db.pessoas_tabela.find({"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoBrasil = db.pessoas_tabela.findOne({"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Técnico"});
-const atletasAlemanha = db.pessoas_tabela.find({"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoAlemanha = db.pessoas_tabela.findOne({"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Técnico"});
-const atletasArgentina = db.pessoas_tabela.find({"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoArgentina = db.pessoas_tabela.findOne({"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Técnico"});
-const atletasPortugal = db.pessoas_tabela.find({"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoPortugal = db.pessoas_tabela.findOne({"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Técnico"});
-const atletasGana = db.pessoas_tabela.find({"pais": "Gana", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoGana = db.pessoas_tabela.findOne({"pais": "Gana", "esporte" : "Futebol", "tipo" : "Técnico"});
-const atletasUruguai = db.pessoas_tabela.find({"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoUruguai = db.pessoas_tabela.findOne({"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Técnico"});
-const atletasJapao = db.pessoas_tabela.find({"pais": "Japão", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoJapao = db.pessoas_tabela.findOne({"pais": "Japão", "esporte" : "Futebol", "tipo" : "Técnico"});
-const atletasEUA = db.pessoas_tabela.find({"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
-const tecnicoEUA = db.pessoas_tabela.findOne({"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasBrasil = db.pessoas_tabela.find({"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoBrasil = db.pessoas_tabela.findOne({"pais": "Brasil", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasAlemanha = db.pessoas_tabela.find({"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoAlemanha = db.pessoas_tabela.findOne({"pais": "Alemanha", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasArgentina = db.pessoas_tabela.find({"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoArgentina = db.pessoas_tabela.findOne({"pais": "Argentina", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasPortugal = db.pessoas_tabela.find({"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoPortugal = db.pessoas_tabela.findOne({"pais": "Portugal", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasGana = db.pessoas_tabela.find({"pais": "Gana", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoGana = db.pessoas_tabela.findOne({"pais": "Gana", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasUruguai = db.pessoas_tabela.find({"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoUruguai = db.pessoas_tabela.findOne({"pais": "Uruguai", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasJapao = db.pessoas_tabela.find({"pais": "Japão", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoJapao = db.pessoas_tabela.findOne({"pais": "Japão", "esporte" : "Futebol", "tipo" : "Técnico"});
+var atletasEUA = db.pessoas_tabela.find({"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Atleta"}).toArray();
+var tecnicoEUA = db.pessoas_tabela.findOne({"pais": "Estados Unidos", "esporte" : "Futebol", "tipo" : "Técnico"});
 
 
 db.equipes_tabela.insertMany(
@@ -1250,14 +1250,14 @@ db.equipes_tabela.insertMany(
 
 // Times de Volei
 
-const atletasBrasilVolei = db.pessoas_tabela.find({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
-const tecnicoBrasilVolei = db.pessoas_tabela.findOne({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Técnico"});
-const atletasEUAVolei = db.pessoas_tabela.find({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
-const tecnicoEUAVolei = db.pessoas_tabela.findOne({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Técnico"});
-const atletasJapaoVolei = db.pessoas_tabela.find({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
-const tecnicoJapaoVolei = db.pessoas_tabela.findOne({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Técnico"});
-const atletasRussiaVolei = db.pessoas_tabela.find({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
-const tecnicoRussiaVolei = db.pessoas_tabela.findOne({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Técnico"});
+var atletasBrasilVolei = db.pessoas_tabela.find({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+var tecnicoBrasilVolei = db.pessoas_tabela.findOne({"pais": "Brasil", "esporte" : "Voleibol", "tipo" : "Técnico"});
+var atletasEUAVolei = db.pessoas_tabela.find({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+var tecnicoEUAVolei = db.pessoas_tabela.findOne({"pais": "Estados Unidos", "esporte" : "Voleibol", "tipo" : "Técnico"});
+var atletasJapaoVolei = db.pessoas_tabela.find({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+var tecnicoJapaoVolei = db.pessoas_tabela.findOne({"pais": "Japão", "esporte" : "Voleibol", "tipo" : "Técnico"});
+var atletasRussiaVolei = db.pessoas_tabela.find({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Atleta"}).toArray();
+var tecnicoRussiaVolei = db.pessoas_tabela.findOne({"pais": "Rússia", "esporte" : "Voleibol", "tipo" : "Técnico"});
 
 
 // Volei
@@ -1296,15 +1296,15 @@ db.equipes_tabela.insertMany([
 
 // Emissoras de TV
 
-const narradorSportv = db.pessoas_tabela.findOne({"emissora": "SporTV", "cargo": "Narrador"});
-const reporteresSportv = db.pessoas_tabela.find({"emissora": "SporTV", "cargo": "Repórter"}).toArray();
-const comentaristasSportv = db.pessoas_tabela.find({"emissora": "SporTV", "cargo": "Comentarista"}).toArray();
-const narradorTNT = db.pessoas_tabela.findOne({"emissora": "TNT", "cargo": "Narrador"});
-const reporteresTNT = db.pessoas_tabela.find({"emissora": "TNT", "cargo": "Repórter"}).toArray();
-const comentaristasTNT = db.pessoas_tabela.find({"emissora": "TNT", "cargo": "Comentarista"}).toArray();
-const narradorESPN = db.pessoas_tabela.findOne({"emissora": "ESPN", "cargo": "Narrador"});
-const reporteresESPN = db.pessoas_tabela.find({"emissora": "ESPN", "cargo": "Repórter"}).toArray();
-const comentaristasESPN = db.pessoas_tabela.find({"emissora": "ESPN", "cargo": "Comentarista"}).toArray();
+var narradorSportv = db.pessoas_tabela.findOne({"emissora": "SporTV", "cargo": "Narrador"});
+var reporteresSportv = db.pessoas_tabela.find({"emissora": "SporTV", "cargo": "Repórter"}).toArray();
+var comentaristasSportv = db.pessoas_tabela.find({"emissora": "SporTV", "cargo": "Comentarista"}).toArray();
+var narradorTNT = db.pessoas_tabela.findOne({"emissora": "TNT", "cargo": "Narrador"});
+var reporteresTNT = db.pessoas_tabela.find({"emissora": "TNT", "cargo": "Repórter"}).toArray();
+var comentaristasTNT = db.pessoas_tabela.find({"emissora": "TNT", "cargo": "Comentarista"}).toArray();
+var narradorESPN = db.pessoas_tabela.findOne({"emissora": "ESPN", "cargo": "Narrador"});
+var reporteresESPN = db.pessoas_tabela.find({"emissora": "ESPN", "cargo": "Repórter"}).toArray();
+var comentaristasESPN = db.pessoas_tabela.find({"emissora": "ESPN", "cargo": "Comentarista"}).toArray();
 
 
 db.emissoras_tabela.insertMany(
