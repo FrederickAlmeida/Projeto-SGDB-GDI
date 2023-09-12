@@ -171,3 +171,20 @@ db.partidas_tabela.mapReduce(
     }
 )
 
+//da join na tabela de pessoa com a de equipe baseado na equipe
+db.pessoas_tabela.aggregate([
+    {
+        $lookup: {
+            from: "equipes_tabela",
+            localField: "equipe",
+            foreignField: "_id",
+            as: "equipe"
+        }
+    }
+])
+
+// Adiciona a atleta Sheilla Castro na equipe de id 1 se ela já não estiver la
+db.equipes_tabela.updateOne(
+    { _id: 1 },
+    { $addToSet: { atletas: db.pessoas_tabela.findOne({"nome": "Sheilla Castro"})}}
+)
