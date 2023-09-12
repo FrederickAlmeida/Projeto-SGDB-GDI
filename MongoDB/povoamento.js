@@ -1,6 +1,6 @@
 // selecionando a db
 
-use olimpiadas_db
+use('olimpiadas_db');
 
 // Inserindo atletas (1-1000)
 // Futebolistas
